@@ -1,0 +1,227 @@
+@startuml Entity_diagram
+
+entity Usuario {
+    *ID: Integer <<PK>>
+    --
+    *Username: String
+    *Email: String
+    *Senha: String
+    *TipoUsuario: String
+    *DataCadastro: Date
+}
+
+entity Manager {
+    *ID: Integer <<PK>>
+    --
+    *Nome: String
+    *Tipo: String
+    --
+    *UsuarioID: Integer <<FK>>
+    *AreaSetorID: Integer <<FK>>
+}
+
+entity Ouvinte {
+    *ID: Integer <<PK>>
+    --
+    *Nome: String
+    +Biografia: String
+    --
+    *UsuarioID: Integer <<FK>>
+}
+
+entity Artista {
+    *ID: Integer <<PK>>
+    --
+    *NomeArtistico: String
+    *NomeCompleto: String
+    *Telefone: String
+    +Biografia: String
+    --
+    +UsuarioID: Integer <<FK>>
+}
+
+entity IdentidadeArtista {
+    *ID: Integer <<PK>>
+    --
+    *DocumentoIdentificacao: String
+    *DataNascimento: Date
+    *Nacionalidade: String
+    --
+    +ArtistaID: Integer <<FK>>
+}
+
+entity Documento {
+    *ID: Integer <<PK>>
+    --
+    *Titulo: String
+    *CaminhoS3: String
+    *DataEnvio: Date
+    --
+    *IdentidadeArtistaID: Integer <<FK>>
+}
+
+entity Album {
+    *ID: Integer <<PK>>
+    --
+    *Titulo: String
+    *DataLancamento: Date
+    +Gravadora: String
+}
+
+entity Genero {
+    *ID: Integer <<PK>>
+    --
+    *Nome: String
+    +Descricao: String
+}
+
+entity Musica {
+    *ID: Integer <<PK>>
+    --
+    *Titulo: String
+    *Duracao: String
+    *DataLancamento: Date
+    *CaminhoS3: String
+    +ImagemS3: String
+    --
+    *ArtistaID: Integer <<FK>>
+    *AlbumID: Integer <<FK>>
+    *GeneroID: Integer <<FK>>
+}
+
+entity Playlist {
+    *ID: Integer <<PK>>
+    --
+    *Nome: String
+    *DataCriacao: Date
+    +Descricao: String
+    --
+    *UsuarioID: Integer <<FK>>
+}
+
+entity PlaylistMusica {
+    *ID: Integer <<PK>>
+    --
+    *MusicaID: Integer <<FK>>
+    *PlaylistID: Integer <<FK>>
+}
+
+entity PlaylistUsuario {
+    *ID: Integer <<PK>>
+    --
+    *Adicionar: Boolean
+    *Remover: Boolean
+    *Ler: Boolean
+    --
+    *UsuarioID: Integer <<FK>>
+    *PlaylistID: Integer <<FK>>
+}
+
+entity AreaSetor {
+    *ID: Integer <<PK>>
+    --
+    *Nome: String
+}
+
+entity Etapa {
+    *ID: Integer <<PK>>
+    --
+    *Nome: String
+    +Descricao: String
+}
+
+entity Solicitacao {
+    *ID: Integer <<PK>>
+    --
+    *NumeroProtocolo: String
+    *TipoSolicitacao: String
+    *Status: String
+    *DataCriacao: Date
+    +DataAtualizacao: Date
+    --
+    *UsuarioID: Integer <<FK>>
+    *ManagerID: Integer <<FK>>
+    *AreaSetorID: Integer <<FK>>
+    *EtapaID: Integer <<FK>>
+}
+
+entity Plano {
+    *ID: Integer <<PK>>
+    --
+    *Nome: String
+    *Descricao: String
+    *Preco: Float
+    *LimitePublicacoes: Integer
+    *Tipo: String
+    *Recorrencia: String
+    *Recursos: String
+}
+
+entity Assinatura {
+    *ID: Integer <<PK>>
+    --
+    *StatusAssinatura: String
+    *MetodoRenovacao: String
+    *DataInicio: Date
+    *DataRenovacao: Date
+    +DataFim: Date
+    --
+    *ArtistaID: Integer <<FK>>
+    *PlanoID: Integer <<FK>>
+}
+
+entity HistoricoPagamento {
+    *ID: Integer <<PK>>
+    --
+    *Valor: Float
+    *DataPagamento: Date
+    *StatusPagamento: String
+    +MotivoFalha: String
+    +StatusReembolso: String
+    +StatusTransacao: String
+    --
+    *AssinaturaID: Integer <<FK>>
+}
+
+entity Conteudo {
+    *ID: Integer <<PK>>
+    --
+    *Titulo: String
+    *Tipo: String
+    *Arquivo: String
+    *DataPublicacao: Date
+    *Descricao: String
+    *Privacidade: String
+    *ComentariosAtivados: Boolean
+    *Visualizacoes: Integer
+    *Curtidas: Integer
+    +Localizacao: String
+    +Tags: String
+    --
+    *ArtistaID: Integer <<FK>>
+}
+
+Usuario ||--o{ Manager: UsuarioID
+Usuario ||--o{ Ouvinte: UsuarioID
+Usuario ||--o{ Artista: UsuarioID
+Artista ||--o{ IdentidadeArtista: ArtistaID
+IdentidadeArtista ||--o{ Documento: IdentidadeArtistaID
+Artista ||--o{ Musica: ArtistaID
+Musica ||--o{ Album: AlbumID
+Musica ||--o{ Genero: GeneroID
+PlaylistUsuario ||--o{ Usuario: UsuarioID
+PlaylistUsuario ||--o{ Playlist: PlaylistID
+PlaylistMusica ||--o{ Playlist: PlaylistID
+PlaylistMusica ||--o{ Musica: MusicaID
+Usuario ||--o{ Playlist: UsuarioID
+Manager ||--o{ AreaSetor: AreaSetorID
+Solicitacao ||--o{ Usuario: UsuarioID
+Solicitacao ||--o{ Manager: ManagerID
+Solicitacao ||--o{ AreaSetor: AreaSetorID
+Solicitacao ||--o{ Etapa: EtapaID
+Assinatura ||--o{ Artista: ArtistaID
+Assinatura ||--o{ Plano: PlanoID
+HistoricoPagamento ||--o{ Assinatura: AssinaturaID
+Conteudo ||--o{ Artista: ArtistaID
+
+@enduml

@@ -1,0 +1,11 @@
+version: '3.8'
+
+services:
+  app:
+    build: .
+    container_name: manager-app
+    #command: .docker/start.sh
+    volumes:
+      - .:/home/node/app
+    ports:
+      - 3000:3000

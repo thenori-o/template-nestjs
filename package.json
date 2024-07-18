@@ -1,0 +1,24 @@
+{
+  "name": "manager-typescript",
+  "version": "0.0.1",
+  "description": "",
+  "main": "index.js",
+  "workspaces": [
+    "./src/@core",
+    "./src/nestjs"
+  ],
+  "scripts": {
+    "prestart:dev": "npm run build -w @nw/core",
+    "start:dev": "npm run build:w -w @nw/core & npm run start:dev -w nestjs",
+    "test": "jest",
+    "test:core": "npm run test -w @nw/core",
+    "test:nestjs": "npm run test -w nestjs"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@swc/core": "^1.6.1",
+    "@swc/jest": "^0.2.36"
+  }
+}

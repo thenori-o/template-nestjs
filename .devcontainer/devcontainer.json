@@ -1,0 +1,29 @@
+{
+	"name": "manager",
+	"dockerComposeFile": [
+		"../docker-composer.yaml",
+		"docker-compose.yml"
+	],
+	"service": "app",
+	"workspaceFolder": "/home/node/app",
+	"customizations": {
+		"vscode": {
+			"extensions": [
+				"rocketseat.theme-omni",
+				"pkief.material-icon-theme",
+				"ecmel.vscode-html-css",
+				"firsttris.vscode-jest-runner",
+				"jebbs.plantuml",
+				"esbenp.prettier-vscode",
+				"streetsidesoftware.code-spell-checker",
+				"ms-azuretools.vscode-docker",
+				"prisma.prisma",
+				"bradlc.vscode-tailwindcss",
+				"dbaeumer.vscode-eslint",
+				"mikestead.dotenv",
+				"oderwat.indent-rainbow",
+				"vivaxy.vscode-conventional-commits"
+			]
+		}
+	}
+}

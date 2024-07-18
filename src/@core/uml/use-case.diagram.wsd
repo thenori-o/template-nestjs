@@ -1,0 +1,161 @@
+@startuml Entity_diagram
+left to right direction
+
+actor Usuario
+actor Artista
+actor Manager
+
+rectangle "Gerenciar Conta" {
+    usecase "Registrar" as UC1_1
+    usecase "Login" as UC1_2
+    usecase "Editar Perfil" as UC1_3
+    usecase "Alterar Senha" as UC1_4
+    usecase "Recuperar Senha" as UC1_5
+    usecase "Logout" as UC1_6
+}
+
+rectangle "Navegar Conteúdo" {
+    usecase "Curtir Conteúdo" as UC3_1
+    usecase "Comentar Conteúdo" as UC3_2
+    usecase "Pesquisar Conteúdo" as UC3_3
+    usecase "Visualizar Detalhes" as UC3_4
+    usecase "Reproduzir Música" as UC3_5
+    usecase "Visualizar Playlist" as UC3_6
+    usecase "Explorar Gêneros" as UC3_7
+    usecase "Visualizar Stories" as UC3_8
+    usecase "Visualizar Publicações" as UC3_9
+}
+
+rectangle "Gerenciar Playlists" {
+    usecase "Criar Playlist" as UC6_1
+    usecase "Editar Playlist" as UC6_2
+    usecase "Adicionar Música" as UC6_3
+    usecase "Remover Música" as UC6_4
+    usecase "Definir Permissões" as UC6_5
+    usecase "Compartilhar Playlist" as UC6_6
+}
+
+rectangle "Solicitar Atendimento" {
+    usecase "Abrir Chamado" as UC8_1
+    usecase "Acompanhar Chamado" as UC8_2
+    usecase "Responder Chamado" as UC8_3
+}
+
+rectangle "Gerenciar Perfil Artista" {
+    usecase "Registrar" as UC2_1
+    usecase "Reivindicar Identidade" as UC2_2
+    usecase "Validar Identidade" as UC2_3
+}
+
+rectangle "Criar e Gerenciar Músicas" {
+    usecase "Criar Música" as UC4_1
+    usecase "Editar Música" as UC4_2
+    usecase "Remover Música" as UC4_3
+    usecase "Classificar Música" as UC4_4
+}
+
+rectangle "Criar e Gerenciar Conteúdo" {
+    usecase "Criar Álbum" as UC5_1
+    usecase "Editar Álbum" as UC5_2
+    usecase "Remover Álbum" as UC5_3
+    usecase "Criar Gênero" as UC5_4
+    usecase "Editar Gênero" as UC5_5
+    usecase "Remover Gênero" as UC5_6
+    usecase "Criar Publicação" as UC5_7
+    usecase "Editar Publicação" as UC5_8
+    usecase "Remover Publicação" as UC5_9
+    usecase "Criar Story" as UC5_10
+    usecase "Editar Story" as UC5_11
+    usecase "Remover Story" as UC5_12
+}
+
+rectangle "Gerenciar Assinatura" {
+    usecase "Assinar Plano" as UC7_1
+    usecase "Ver Planos Disponíveis" as UC7_2
+    usecase "Cancelar Assinatura" as UC7_3
+    usecase "Atualizar Assinatura" as UC7_4
+}
+
+rectangle "Gerenciar Solicitações" {
+    usecase "Visualizar Solicitações" as UC9_1
+    usecase "Atribuir Solicitação" as UC9_2
+    usecase "Responder Solicitação" as UC9_3
+    usecase "Fechar Chamado" as UC9_4
+}
+
+rectangle "Visualizar Estatísticas" {
+    usecase "Visualizar Estatísticas de Conteúdo" as UC10_1
+    usecase "Visualizar Estatísticas de Assinatura" as UC10_2
+}
+
+Usuario --> UC1_1
+Usuario --> UC1_2
+Usuario --> UC1_3
+Usuario --> UC1_4
+Usuario --> UC1_5
+Usuario --> UC1_6
+
+UC3_1 <-- Usuario
+UC3_2 <-- Usuario
+UC3_3 <-- Usuario
+UC3_4 <-- Usuario
+UC3_5 <-- Usuario
+UC3_6 <-- Usuario
+UC3_7 <-- Usuario
+UC3_8 <-- Usuario
+UC3_9 <-- Usuario
+
+Usuario --> UC6_1
+Usuario --> UC6_2
+Usuario --> UC6_3
+Usuario --> UC6_4
+Usuario --> UC6_5
+Usuario --> UC6_6
+
+UC8_1 <-- Usuario
+UC8_2 <-- Usuario
+UC8_3 <-- Usuario
+
+UC5_1 <-- Manager
+UC5_2 <-- Manager
+UC5_3 <-- Manager
+UC5_4 <-- Manager
+UC5_5 <-- Manager
+UC5_6 <-- Manager
+UC5_7 <-- Manager
+UC5_8 <-- Manager
+UC5_9 <-- Manager
+UC5_10 <-- Manager
+UC5_11 <-- Manager
+UC5_12 <-- Manager
+
+Manager --> UC2_1
+Manager --> UC2_2
+Manager --> UC2_3
+Artista --> UC2_1
+Artista --> UC2_2
+Artista --> UC2_3
+
+Artista --> UC4_1
+Artista --> UC4_2
+Artista --> UC4_3
+Artista --> UC4_4
+
+Manager --> UC7_1
+Manager --> UC7_2
+Manager --> UC7_3
+Manager --> UC7_4
+UC7_1 <-- Artista
+UC7_2 <-- Artista
+UC7_3 <-- Artista
+UC7_4 <-- Artista
+
+Manager --> UC9_1
+Manager --> UC9_2
+Manager --> UC9_3
+Manager --> UC9_4
+
+Manager --> UC10_1
+Manager --> UC10_2
+
+@enduml
